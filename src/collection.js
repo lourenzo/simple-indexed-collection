@@ -26,11 +26,9 @@ var _ = require('lodash');
      * Find an item by subitems matching
      * @param  {Mixed} query Can be a string or object
      */
-    IndexedCollection.prototype.find = function (subject) {
-        var query;
-        if (typeof subject == string || typeof subject == number) {
-
-        }
+    IndexedCollection.prototype.find = function () {
+        var args = arguments.unshift(this);
+        return _.find.apply(this, args);
     }
 
     /**
