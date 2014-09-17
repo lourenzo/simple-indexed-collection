@@ -4,14 +4,8 @@ var _ = require('lodash');
      * Indexed Collection Constructor
      * @constructor
      */
-    function IndexedCollection(){
-        this.vector = [];
-        this.index = {};
-        Object.defineProperty(this, 'length', {
-            get: function () {
-                return this.vector.length
-            }
-        });
+    function IndexedCollection () {
+        this.data = {};
     }
 
     /**
@@ -22,12 +16,10 @@ var _ = require('lodash');
         if (!data.id) {
             throw new Error('No ID informed to IndexedCollection.prototype.add');
         }
-        if (this.index[data.id]) {
+        if (this.data[data.id]) {
             return this.edit(data.id, data);
         }
-        var itemIndex = this.vector.push(data);
-        this.index[data.id] = itemIndex - 1;
-        return itemIndex;
+        this.data[data.id] = data;
     }
 
     /**
@@ -47,8 +39,7 @@ var _ = require('lodash');
      * @return {Object}
      */
     IndexedCollection.prototype.findById = function (id) {
-        var idx = this.index[id];
-        return this.vector[idx];
+        return this.data[idx];
     }
 
     /**
@@ -58,11 +49,10 @@ var _ = require('lodash');
      * @return {Boolean} true if edition is done
      */
     IndexedCollection.prototype.edit = function (id, data) {
-        var idx = this.index[id];
-        if (!this.vector[idx]) {
+        if (!this.data[id]) {
             throw new Error('Item not found');
         }
-        this.vector[idx] = _.merge(data, this.vector[idx]);
+        this.data[id] = _.merge(data, this.data[id]);
         return true;
     }
 
@@ -71,16 +61,7 @@ var _ = require('lodash');
      * @param  {String} id
      */
     IndexedCollection.prototype.remove = function (id) {
-        var idx = this.index[id];
-        delete this.vector[idx];
-        delete this.index[id];
-        this._rebuildIndex();
-    }
-
-    IndexedCollection.prototype._rebuildIndex = function () {
-        for (var i = 0; i < this.vector.length; i++) {
-            this.vector[i]
-        };
+        delete this.data[id];
     }
 
     this.IndexedCollection = IndexedCollection;
