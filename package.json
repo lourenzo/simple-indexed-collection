@@ -1,0 +1,26 @@
+{
+  "name": "simple-indexed-collection",
+  "version": "0.0.0",
+  "description": "JavaScript simple in-memory indexed Collection, loosely inspired by mongodb's collections",
+  "main": "simple-indexed-collection.node.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lourenzo/simple-indexed-collection.git"
+  },
+  "keywords": [
+    "collection",
+    "indexed"
+  ],
+  "author": "Lourenzo Ferreira <lourenzo@gmail.com>",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/lourenzo/simple-indexed-collection/issues"
+  },
+  "homepage": "https://github.com/lourenzo/simple-indexed-collection"
+}
